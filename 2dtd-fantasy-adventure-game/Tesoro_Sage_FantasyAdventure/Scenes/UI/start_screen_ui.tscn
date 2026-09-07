@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://boio538e62riu"]
+
+[ext_resource type="Texture2D" uid="uid://ce2koajwud1xt" path="res://Tesoro_Sage_FantasyAdventure/Assets/Art/Backgrounds/BG_01.png" id="1_acklg"]
+[ext_resource type="Texture2D" uid="uid://ccw3edkkpgblp" path="res://Tesoro_Sage_FantasyAdventure/Assets/Fonts/Game Title Logo_transp.png" id="2_7ih36"]
+[ext_resource type="Texture2D" uid="uid://civ8s2tugsbqx" path="res://Tesoro_Sage_FantasyAdventure/Assets/Fonts/Sage_Tesoro_text.png" id="3_0okfu"]
+
+[node name="StartScreenUI" type="Control" unique_id=673735861]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BGTextRect" type="TextureRect" parent="." unique_id=1668619569]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_acklg")
+
+[node name="TitleLogo" type="TextureRect" parent="." unique_id=151086617]
+layout_mode = 0
+offset_left = 342.0
+offset_top = 37.0
+offset_right = 1485.0
+offset_bottom = 497.0
+scale = Vector2(0.66782874, 0.7195975)
+texture = ExtResource("2_7ih36")
+
+[node name="StartButton" type="Button" parent="." unique_id=1337347539]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 390.0
+offset_right = 450.0
+offset_bottom = 460.0
+text = "Start"
+
+[node name="QuitButton" type="Button" parent="." unique_id=943482821]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 493.0
+offset_right = 446.0
+offset_bottom = 546.0
+text = "Quit
+"
+
+[node name="QuitConfigDialog" type="ConfirmationDialog" parent="." unique_id=1403173246]
+oversampling_override = 1.0
+
+[node name="TitleAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1900322821]
+root_node = NodePath("../QuitConfigDialog")
+
+[node name="SageTesoroText" type="Sprite2D" parent="." unique_id=2080860258]
+position = Vector2(808.0372, 417.65656)
+scale = Vector2(0.58202535, 0.5860399)
+texture = ExtResource("3_0okfu")
