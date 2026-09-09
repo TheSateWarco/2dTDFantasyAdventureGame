@@ -4,6 +4,43 @@
 [ext_resource type="Texture2D" uid="uid://ccw3edkkpgblp" path="res://Tesoro_Sage_FantasyAdventure/Assets/Fonts/Game Title Logo_transp.png" id="2_7ih36"]
 [ext_resource type="Texture2D" uid="uid://civ8s2tugsbqx" path="res://Tesoro_Sage_FantasyAdventure/Assets/Fonts/Sage_Tesoro_text.png" id="3_0okfu"]
 
+[sub_resource type="Animation" id="Animation_7ih36"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../TitleLogo:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.66782874, 0.7195975)]
+}
+
+[sub_resource type="Animation" id="Animation_0okfu"]
+resource_name = "Title"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../TitleLogo:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.66782874, 0.7195975), Vector2(0.558, 0.604)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l0hlu"]
+_data = {
+&"RESET": SubResource("Animation_7ih36"),
+&"Title": SubResource("Animation_0okfu")
+}
+
 [node name="StartScreenUI" type="Control" unique_id=673735861]
 layout_mode = 3
 anchors_preset = 15
@@ -20,11 +57,12 @@ texture = ExtResource("1_acklg")
 
 [node name="TitleLogo" type="TextureRect" parent="." unique_id=151086617]
 layout_mode = 0
-offset_left = 342.0
-offset_top = 37.0
-offset_right = 1485.0
-offset_bottom = 497.0
+offset_left = 165.0
+offset_top = -16.0
+offset_right = 1308.0
+offset_bottom = 444.0
 scale = Vector2(0.66782874, 0.7195975)
+pivot_offset = Vector2(570.50555, 205.67053)
 texture = ExtResource("2_7ih36")
 
 [node name="StartButton" type="Button" parent="." unique_id=1337347539]
@@ -49,6 +87,7 @@ oversampling_override = 1.0
 
 [node name="TitleAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1900322821]
 root_node = NodePath("../QuitConfigDialog")
+libraries/ = SubResource("AnimationLibrary_l0hlu")
 
 [node name="SageTesoroText" type="Sprite2D" parent="." unique_id=2080860258]
 position = Vector2(808.0372, 417.65656)
