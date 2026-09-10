@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://chnlly1wtrapr"]
+
+[ext_resource type="Texture2D" uid="uid://ce2koajwud1xt" path="res://Tesoro_Sage_FantasyAdventure/Assets/Art/Backgrounds/BG_01.png" id="1_k0x5d"]
+
+[node name="MainGameLvl" type="Node2D" unique_id=1953114883]
+
+[node name="BGTextRect" type="TextureRect" parent="." unique_id=26449894]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_k0x5d")

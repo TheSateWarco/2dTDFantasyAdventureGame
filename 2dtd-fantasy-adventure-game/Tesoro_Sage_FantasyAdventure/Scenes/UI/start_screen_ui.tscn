@@ -1,22 +1,46 @@
 [gd_scene format=3 uid="uid://boio538e62riu"]
 
+[ext_resource type="Script" uid="uid://diqyfvqoutxox" path="res://Tesoro_Sage_FantasyAdventure/Scripts/start_screen_ui.gd" id="1_6n0g4"]
 [ext_resource type="Texture2D" uid="uid://ce2koajwud1xt" path="res://Tesoro_Sage_FantasyAdventure/Assets/Art/Backgrounds/BG_01.png" id="1_acklg"]
 [ext_resource type="Texture2D" uid="uid://ccw3edkkpgblp" path="res://Tesoro_Sage_FantasyAdventure/Assets/Fonts/Game Title Logo_transp.png" id="2_7ih36"]
 [ext_resource type="Texture2D" uid="uid://civ8s2tugsbqx" path="res://Tesoro_Sage_FantasyAdventure/Assets/Fonts/Sage_Tesoro_text.png" id="3_0okfu"]
+[ext_resource type="Texture2D" uid="uid://coxtmy1m7pfah" path="res://Tesoro_Sage_FantasyAdventure/Assets/Art/Badges&Icons/greenButton.png" id="3_l0hlu"]
+[ext_resource type="Texture2D" uid="uid://cbi663873cx5o" path="res://Tesoro_Sage_FantasyAdventure/Assets/Art/Badges&Icons/redButton.png" id="4_l0hlu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0okfu"]
+texture = ExtResource("3_l0hlu")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6n0g4"]
+texture = ExtResource("3_l0hlu")
+modulate_color = Color(0.5662982, 0.5662982, 0.5662982, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l0hlu"]
+texture = ExtResource("3_l0hlu")
+modulate_color = Color(1, 1, 1, 0.7647059)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8mrxr"]
+texture = ExtResource("4_l0hlu")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v0nt6"]
+texture = ExtResource("4_l0hlu")
+modulate_color = Color(0.5796909, 0.57969093, 0.57969093, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6b1at"]
+texture = ExtResource("4_l0hlu")
+modulate_color = Color(1.0039216, 0.9999855, 0.9999855, 0.67058825)
 
 [sub_resource type="Animation" id="Animation_7ih36"]
-length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("../TitleLogo:scale")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 2.8284276),
 "update": 0,
-"values": [Vector2(0.66782874, 0.7195975)]
+"values": [Vector2(0.033, 0.036), Vector2(0.66782874, 0.7195975)]
 }
 
 [sub_resource type="Animation" id="Animation_0okfu"]
@@ -26,7 +50,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("../TitleLogo:scale")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1, 1.2),
@@ -48,6 +72,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6n0g4")
 
 [node name="BGTextRect" type="TextureRect" parent="." unique_id=1668619569]
 layout_mode = 0
@@ -61,7 +86,7 @@ offset_left = 165.0
 offset_top = -16.0
 offset_right = 1308.0
 offset_bottom = 444.0
-scale = Vector2(0.66782874, 0.7195975)
+scale = Vector2(0.033, 0.036)
 pivot_offset = Vector2(570.50555, 205.67053)
 texture = ExtResource("2_7ih36")
 
@@ -71,25 +96,36 @@ offset_left = 67.0
 offset_top = 390.0
 offset_right = 450.0
 offset_bottom = 460.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_0okfu")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_6n0g4")
+theme_override_styles/hover = SubResource("StyleBoxTexture_l0hlu")
 text = "Start"
 
-[node name="QuitButton" type="Button" parent="." unique_id=943482821]
+[node name="QuitButton" type="Button" parent="." unique_id=209600859]
 layout_mode = 0
-offset_left = 81.0
-offset_top = 493.0
-offset_right = 446.0
-offset_bottom = 546.0
-text = "Quit
-"
+offset_left = 68.0
+offset_top = 486.0
+offset_right = 451.0
+offset_bottom = 556.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_8mrxr")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_v0nt6")
+theme_override_styles/hover = SubResource("StyleBoxTexture_6b1at")
+text = "Quit"
 
-[node name="QuitConfigDialog" type="ConfirmationDialog" parent="." unique_id=1403173246]
+[node name="QuitConfirmDialog" type="ConfirmationDialog" parent="." unique_id=1403173246]
 oversampling_override = 1.0
+dialog_text = "Are you sure you want to quit?"
 
 [node name="TitleAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1900322821]
-root_node = NodePath("../QuitConfigDialog")
+root_node = NodePath("../QuitConfirmDialog")
 libraries/ = SubResource("AnimationLibrary_l0hlu")
+autoplay = &"Title"
 
 [node name="SageTesoroText" type="Sprite2D" parent="." unique_id=2080860258]
 position = Vector2(808.0372, 417.65656)
 scale = Vector2(0.58202535, 0.5860399)
 texture = ExtResource("3_0okfu")
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="confirmed" from="QuitConfirmDialog" to="." method="_on_quit_config_dialog_confirmed"]
