@@ -46,6 +46,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0.033, 0.036), Vector2(0.66782874, 0.7195975)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Scroll01:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.013781552, 0.34610853), Vector2(0.25649574, 0.34610853)]
+}
 
 [sub_resource type="Animation" id="Animation_0okfu"]
 resource_name = "Title"
@@ -123,11 +135,11 @@ dialog_text = "Are you sure you want to quit?"
 [node name="TitleAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1900322821]
 root_node = NodePath("../QuitConfirmDialog")
 libraries/ = SubResource("AnimationLibrary_l0hlu")
-autoplay = &"Title"
+autoplay = &"RESET"
 
 [node name="Scroll01" type="Sprite2D" parent="." unique_id=1834667063]
-position = Vector2(793, 467)
-scale = Vector2(0.25649574, 0.34610853)
+position = Vector2(719, 470)
+scale = Vector2(0.013781552, 0.34610853)
 texture = ExtResource("6_v0nt6")
 
 [node name="SageTesoroText" type="Sprite2D" parent="Scroll01" unique_id=2080860258]
