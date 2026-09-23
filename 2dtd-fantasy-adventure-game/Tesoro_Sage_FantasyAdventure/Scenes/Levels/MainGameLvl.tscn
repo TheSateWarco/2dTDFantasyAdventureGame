@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://chnlly1wtrapr"]
 
 [ext_resource type="Texture2D" uid="uid://ce2koajwud1xt" path="res://Tesoro_Sage_FantasyAdventure/Assets/Art/Backgrounds/BG_01.png" id="1_k0x5d"]
+[ext_resource type="PackedScene" uid="uid://dq1cld2f0x4ew" path="res://Tesoro_Sage_FantasyAdventure/Scenes/Characters/Player.tscn" id="2_iuuj8"]
 
 [node name="MainGameLvl" type="Node2D" unique_id=1953114883]
+scale = Vector2(0.447585, 0.4963298)
 
 [node name="BGTextRect" type="TextureRect" parent="." unique_id=26449894]
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_k0x5d")
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="BGTextRect" unique_id=1751883076]
 layout_mode = 0
@@ -16,3 +19,8 @@ offset_top = 156.0
 offset_right = 832.0
 offset_bottom = 179.0
 text = "This is gameplay scene :)"
+metadata/_edit_use_anchors_ = true
+
+[node name="Player" parent="." unique_id=70149729 instance=ExtResource("2_iuuj8")]
+position = Vector2(945.07196, 390.86914)
+scale = Vector2(13.789689, 11.239554)

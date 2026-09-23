@@ -88,6 +88,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.41631082, 0.50008535)
 script = ExtResource("1_6n0g4")
 
 [node name="BGTextRect" type="TextureRect" parent="." unique_id=1668619569]
@@ -98,10 +99,10 @@ texture = ExtResource("1_acklg")
 
 [node name="TitleLogo" type="TextureRect" parent="." unique_id=151086617]
 layout_mode = 0
-offset_left = 165.0
-offset_top = -16.0
-offset_right = 1308.0
-offset_bottom = 444.0
+offset_left = 324.27695
+offset_top = -15.997253
+offset_right = 1467.277
+offset_bottom = 444.00275
 scale = Vector2(0.033, 0.036)
 pivot_offset = Vector2(570.50555, 205.67053)
 texture = ExtResource("2_7ih36")
@@ -138,7 +139,7 @@ libraries/ = SubResource("AnimationLibrary_l0hlu")
 autoplay = &"RESET"
 
 [node name="Scroll01" type="Sprite2D" parent="." unique_id=1834667063]
-position = Vector2(719, 470)
+position = Vector2(893.5632, 469.91974)
 scale = Vector2(0.013781552, 0.34610853)
 texture = ExtResource("6_v0nt6")
 
