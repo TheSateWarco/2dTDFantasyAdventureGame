@@ -1405,6 +1405,11 @@ animations = [{
 "loop": 1,
 "name": &"idleDown",
 "speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"idleUp",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k0x5d"]
@@ -1416,9 +1421,7 @@ script = ExtResource("1_kp4g2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1357244899]
 sprite_frames = SubResource("SpriteFrames_l20gf")
-animation = &"attackDown"
-frame = 3
-frame_progress = 1.0
+animation = &"idleUp"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=253331016]
 position = Vector2(0, -2)
