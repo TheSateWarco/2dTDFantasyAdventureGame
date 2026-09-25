@@ -795,6 +795,30 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("1_vhbr8")
 region = Rect2(32, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_kp4g2"]
+atlas = ExtResource("1_vhbr8")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgxnw"]
+atlas = ExtResource("1_vhbr8")
+region = Rect2(32, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4b0ok"]
+atlas = ExtResource("1_vhbr8")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gh1l8"]
+atlas = ExtResource("1_vhbr8")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8deb"]
+atlas = ExtResource("1_vhbr8")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbuog"]
+atlas = ExtResource("1_vhbr8")
+region = Rect2(32, 128, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_l20gf"]
 animations = [{
 "frames": [{
@@ -1406,9 +1430,42 @@ animations = [{
 "name": &"idleDown",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kp4g2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgxnw")
+}],
+"loop": 1,
+"name": &"idleLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4b0ok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gh1l8")
+}],
+"loop": 1,
+"name": &"idleRight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8deb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbuog")
+}],
 "loop": 1,
 "name": &"idleUp",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"new_animation",
 "speed": 5.0
 }]
 
@@ -1421,7 +1478,7 @@ script = ExtResource("1_kp4g2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1357244899]
 sprite_frames = SubResource("SpriteFrames_l20gf")
-animation = &"idleUp"
+animation = &"idleRight"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=253331016]
 position = Vector2(0, -2)
