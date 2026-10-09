@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://ce2koajwud1xt" path="res://Tesoro_Sage_FantasyAdventure/Assets/Art/Backgrounds/BG_01.png" id="1_k0x5d"]
 [ext_resource type="PackedScene" uid="uid://dq1cld2f0x4ew" path="res://Tesoro_Sage_FantasyAdventure/Scenes/Characters/Player.tscn" id="2_iuuj8"]
+[ext_resource type="PackedScene" uid="uid://cke0gxn00xiji" path="res://Tesoro_Sage_FantasyAdventure/Scenes/HUD/HealthBar.tscn" id="3_4frqq"]
+[ext_resource type="PackedScene" uid="uid://cmuknvmn604cd" path="res://Tesoro_Sage_FantasyAdventure/Scenes/Characters/Blob.tscn" id="4_pupx1"]
 
 [node name="MainGameLvl" type="Node2D" unique_id=1953114883]
 scale = Vector2(0.447585, 0.4963298)
@@ -23,4 +25,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." unique_id=70149729 instance=ExtResource("2_iuuj8")]
 position = Vector2(945.07196, 390.86914)
-scale = Vector2(13.789689, 11.239554)
+scale = Vector2(5.125, 4.179)
+
+[node name="HealthBar" parent="." unique_id=512292260 instance=ExtResource("3_4frqq")]
+
+[node name="Blob" parent="." unique_id=608503223 groups=["enemies"] instance=ExtResource("4_pupx1")]
+position = Vector2(495.9952, 429.15012)
+scale = Vector2(4.02, 4.02)

@@ -3,6 +3,17 @@ extends CharacterBody2D
 @onready var animatedSprite = $AnimatedSprite2D
 @onready var lastDirection = "Down"
 @onready var is_action_playing = false
+@onready var max_health: int = 100
+@onready var health: int = 100
+signal health_changed(new_health)
+
+
+
+func take_damage(amount: int):
+	health -= amount
+	health = max(health, 0)
+	play_action_animation("hit")
+	health_changed.emit(health)
 
 func _physics_process(_delta):
 	

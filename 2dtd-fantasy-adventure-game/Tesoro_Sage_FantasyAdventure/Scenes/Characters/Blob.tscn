@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cmuknvmn604cd"]
+
+[ext_resource type="Script" uid="uid://dhr1gkjxjv2rb" path="res://Tesoro_Sage_FantasyAdventure/Scripts/blobAI.gd" id="1_hxqqi"]
+[ext_resource type="Texture2D" uid="uid://cpp2sjakyfybd" path="res://Tesoro_Sage_FantasyAdventure/Assets/Art/Character/Virgil.jpg" id="1_y8vdf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7gjvw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hxqqi"]
+radius = 19.186903
+
+[node name="Blob" type="CharacterBody2D" unique_id=608503223]
+scale = Vector2(2.525, 2.525)
+collision_layer = 2
+script = ExtResource("1_hxqqi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1430882816]
+position = Vector2(0, -1.955)
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("1_y8vdf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1212402065]
+position = Vector2(0, -1.9999999)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_7gjvw")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=98839584]
+position = Vector2(0, 2.875)
+scale = Vector2(2.25, 2.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=732381919]
+position = Vector2(0, -1.9999999)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CircleShape2D_hxqqi")

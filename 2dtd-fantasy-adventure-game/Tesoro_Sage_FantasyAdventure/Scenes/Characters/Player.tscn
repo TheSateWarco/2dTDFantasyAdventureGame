@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dq1cld2f0x4ew"]
 
-[ext_resource type="Script" uid="uid://ccy7tydykl4by" path="res://Tesoro_Sage_FantasyAdventure/Scenes/Characters/player.gd" id="1_kp4g2"]
+[ext_resource type="Script" uid="uid://ccy7tydykl4by" path="res://Tesoro_Sage_FantasyAdventure/Scripts/player.gd" id="1_kp4g2"]
 [ext_resource type="Texture2D" uid="uid://dp568nati4jwx" path="res://Tesoro_Sage_FantasyAdventure/Assets/Art/Character/Mage-Cyan.png" id="1_vhbr8"]
+[ext_resource type="Script" uid="uid://drknsjov1n035" path="res://Tesoro_Sage_FantasyAdventure/Scripts/damageArea.gd" id="3_fgxnw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_el3qw"]
 atlas = ExtResource("1_vhbr8")
@@ -1905,9 +1906,10 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k0x5d"]
 radius = 6.0
-height = 14.0
+height = 18.0
 
-[node name="Player" type="CharacterBody2D" unique_id=70149729]
+[node name="Player" type="CharacterBody2D" unique_id=70149729 groups=["player"]]
+collision_mask = 2
 script = ExtResource("1_kp4g2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1357244899]
@@ -1915,6 +1917,15 @@ sprite_frames = SubResource("SpriteFrames_l20gf")
 animation = &"dieRight"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=253331016]
+position = Vector2(0, -2)
+scale = Vector2(0.785, 0.785)
+shape = SubResource("CapsuleShape2D_k0x5d")
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=1405051952]
+collision_mask = 2
+script = ExtResource("3_fgxnw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=557660920]
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_k0x5d")
 

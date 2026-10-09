@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cke0gxn00xiji"]
+
+[ext_resource type="Script" uid="uid://dkynui0he38eb" path="res://Tesoro_Sage_FantasyAdventure/Scripts/healthBar.gd" id="1_oeogb"]
+
+[node name="HealthBar" type="CanvasLayer" unique_id=512292260]
+
+[node name="healthBar" type="ProgressBar" parent="." unique_id=615535653]
+modulate = Color(0.97566444, 4.5724214e-06, 1.540184e-06, 1)
+offset_right = 369.0
+offset_bottom = 38.0
+script = ExtResource("1_oeogb")
