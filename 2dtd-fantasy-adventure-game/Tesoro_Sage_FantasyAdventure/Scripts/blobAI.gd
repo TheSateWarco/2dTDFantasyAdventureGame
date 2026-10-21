@@ -1,12 +1,18 @@
 
 extends CharacterBody2D
 
-enum State { IDLE, PATROL, CHASE }
+enum State { IDLE, PATROL, CHASE, ATTACK }
 
+@export_group("Movement")
 @export var patrol_speed: float = 40.0
-@export var chase_speed: float = 90.0
+@export var chase_speed: float = 70.0
+
+@export_group("Timing")
 @export var idle_time: float = 2.0
+@export var chase_time: float = 2.0
 @export var patrol_distance: float = 100.0
+
+
 
 var current_state: State = State.IDLE
 var player: CharacterBody2D = null
@@ -14,7 +20,9 @@ var player: CharacterBody2D = null
 var patrol_points: Array[Vector2] = []
 var patrol_index: int = 0
 var idle_timer: float = 0.0
+var chase_timer: float = 0.0
 var is_patrolling: bool = false
+var lastKnownPlayerLocation = Vector2.ZERO
 
 @onready var detectionArea: Area2D = $DetectionArea
 
@@ -69,15 +77,22 @@ func patrol():
 		current_state = State.IDLE
 
 func chase_player():
+	var direction = 0
 	if not is_instance_valid(player):
 		player = null
+		chase_timer = chase_time
+		while chase_timer > 0:
+			direction = lastKnownPlayerLocation
+			velocity = direction * chase_speed
+			chase_timer -= 1
 		current_state = State.PATROL
 		velocity = Vector2.ZERO
 		return
 
-	var direction = global_position.direction_to(
+	direction = global_position.direction_to(
 		player.global_position
 	)
+	lastKnownPlayerLocation = direction
 
 	velocity = direction * chase_speed
 

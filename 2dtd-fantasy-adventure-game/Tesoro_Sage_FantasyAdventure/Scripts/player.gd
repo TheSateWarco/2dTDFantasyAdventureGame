@@ -7,13 +7,17 @@ extends CharacterBody2D
 @onready var health: int = 100
 signal health_changed(new_health)
 
-
+@onready var HurtSound: AudioStreamPlayer2D = $HurtSound
+@onready var SwordSlashSound: AudioStreamPlayer2D = $SwordSlashSound
 
 func take_damage(amount: int):
+	HurtSound.play()
 	health -= amount
 	health = max(health, 0)
 	play_action_animation("hit")
 	health_changed.emit(health)
+	
+	
 
 func _physics_process(_delta):
 	
@@ -49,6 +53,7 @@ func update_direction(input_direction):
 func _unhandled_input(event):
 	if event.is_action_pressed("attack"):
 		play_action_animation("attack")
+		SwordSlashSound.play()
 	elif event.is_action_pressed("testHit"):
 		play_action_animation("hit")
 	elif event.is_action_pressed("testDie"):

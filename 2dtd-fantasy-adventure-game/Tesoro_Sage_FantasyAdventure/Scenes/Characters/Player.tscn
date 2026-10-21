@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://ccy7tydykl4by" path="res://Tesoro_Sage_FantasyAdventure/Scripts/player.gd" id="1_kp4g2"]
 [ext_resource type="Texture2D" uid="uid://dp568nati4jwx" path="res://Tesoro_Sage_FantasyAdventure/Assets/Art/Character/Mage-Cyan.png" id="1_vhbr8"]
 [ext_resource type="Script" uid="uid://drknsjov1n035" path="res://Tesoro_Sage_FantasyAdventure/Scripts/damageArea.gd" id="3_fgxnw"]
+[ext_resource type="AudioStream" uid="uid://bm57p2g8hi8vf" path="res://Tesoro_Sage_FantasyAdventure/Assets/Audio/Hurt.mp3" id="4_4b0ok"]
+[ext_resource type="AudioStream" uid="uid://cv2onpxt28dnf" path="res://Tesoro_Sage_FantasyAdventure/Assets/Audio/SwordSlash.mp3" id="5_gh1l8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_el3qw"]
 atlas = ExtResource("1_vhbr8")
@@ -1928,5 +1930,13 @@ script = ExtResource("3_fgxnw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=557660920]
 position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_k0x5d")
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="." unique_id=180231562]
+stream = ExtResource("4_4b0ok")
+volume_db = 10.0
+
+[node name="SwordSlashSound" type="AudioStreamPlayer2D" parent="." unique_id=1773230159]
+stream = ExtResource("5_gh1l8")
+volume_db = 10.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
