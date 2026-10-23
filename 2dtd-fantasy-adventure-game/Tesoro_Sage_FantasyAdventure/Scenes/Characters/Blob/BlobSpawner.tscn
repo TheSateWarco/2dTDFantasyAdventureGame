@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bnkc7ld2q82yy"]
+
+[ext_resource type="Script" uid="uid://br6s88p6f0bgh" path="res://Tesoro_Sage_FantasyAdventure/Scenes/Characters/Blob/blobSpawner.gd" id="1_38dhv"]
+
+[node name="BlobSpawner" type="Node2D" unique_id=707178425]
+position = Vector2(1, 0)
+scale = Vector2(3, 3)
+script = ExtResource("1_38dhv")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=928785792]
+
+[node name="SpawnPoint1" type="Marker2D" parent="." unique_id=530810691]
+position = Vector2(-31, -42)
+
+[node name="SpawnPoint2" type="Marker2D" parent="." unique_id=1480717098]
+position = Vector2(47, 36)

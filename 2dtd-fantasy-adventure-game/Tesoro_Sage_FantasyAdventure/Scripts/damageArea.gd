@@ -12,7 +12,7 @@ func _ready():
 	if player == null:
 		print("ERROR: DamageArea parent is not the Player!")
 		return
-
+	
 	body_entered.connect(_on_body_entered)
 
 
@@ -23,4 +23,5 @@ func _on_body_entered(body: Node2D):
 
 	if body.is_in_group("enemies"):
 		player.take_damage(damage)
+		player.apply_knockback(body.global_position)
 		print("Player health: ", player.health)

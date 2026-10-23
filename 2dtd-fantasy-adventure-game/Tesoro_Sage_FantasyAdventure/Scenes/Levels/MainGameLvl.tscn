@@ -3,7 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://ce2koajwud1xt" path="res://Tesoro_Sage_FantasyAdventure/Assets/Art/Backgrounds/BG_01.png" id="1_k0x5d"]
 [ext_resource type="PackedScene" uid="uid://dq1cld2f0x4ew" path="res://Tesoro_Sage_FantasyAdventure/Scenes/Characters/Player.tscn" id="2_iuuj8"]
 [ext_resource type="PackedScene" uid="uid://cke0gxn00xiji" path="res://Tesoro_Sage_FantasyAdventure/Scenes/HUD/HealthBar.tscn" id="3_4frqq"]
-[ext_resource type="PackedScene" uid="uid://cmuknvmn604cd" path="res://Tesoro_Sage_FantasyAdventure/Scenes/Characters/Blob.tscn" id="4_pupx1"]
+[ext_resource type="PackedScene" uid="uid://cmuknvmn604cd" path="res://Tesoro_Sage_FantasyAdventure/Scenes/Characters/Blob/Blob.tscn" id="4_pupx1"]
+[ext_resource type="PackedScene" uid="uid://bnkc7ld2q82yy" path="res://Tesoro_Sage_FantasyAdventure/Scenes/Characters/Blob/BlobSpawner.tscn" id="5_1gsnn"]
 
 [node name="MainGameLvl" type="Node2D" unique_id=1953114883]
 scale = Vector2(0.447585, 0.4963298)
@@ -31,4 +32,11 @@ scale = Vector2(5.125, 4.179)
 
 [node name="Blob" parent="." unique_id=608503223 groups=["enemies"] instance=ExtResource("4_pupx1")]
 position = Vector2(495.9952, 429.15012)
-scale = Vector2(4.02, 4.02)
+scale = Vector2(0.4, 0.4)
+
+[node name="BlobSpawner" parent="." unique_id=707178425 instance=ExtResource("5_1gsnn")]
+position = Vector2(764.1007, 425.1205)
+blob_scene = ExtResource("4_pupx1")
+
+[node name="Blob2" parent="." unique_id=2103814321 groups=["enemies"] instance=ExtResource("4_pupx1")]
+position = Vector2(1110.4036, 155.1388)

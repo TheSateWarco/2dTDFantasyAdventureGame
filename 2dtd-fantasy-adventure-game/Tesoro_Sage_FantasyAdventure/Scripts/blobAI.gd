@@ -1,7 +1,7 @@
 
 extends CharacterBody2D
 
-enum State { IDLE, PATROL, CHASE, ATTACK }
+enum State { IDLE, PATROL, CHASE, SEARCH, ATTACK }
 
 @export_group("Movement")
 @export var patrol_speed: float = 40.0
@@ -9,8 +9,10 @@ enum State { IDLE, PATROL, CHASE, ATTACK }
 
 @export_group("Timing")
 @export var idle_time: float = 2.0
-@export var chase_time: float = 2.0
 @export var patrol_distance: float = 100.0
+@export var search_wait_time: float = 1.0
+var search_timer: float = 0.0
+var last_known_player_location: Vector2 = Vector2.ZERO
 
 
 
@@ -56,7 +58,11 @@ func _physics_process(delta):
 		State.CHASE:
 			chase_player()
 
+		State.SEARCH:
+			search_last_location(delta)
+
 	move_and_slide()
+
 
 
 func patrol():
@@ -77,17 +83,18 @@ func patrol():
 		current_state = State.IDLE
 
 func chase_player():
-	var direction = 0
 	if not is_instance_valid(player):
 		player = null
-		chase_timer = chase_time
-		while chase_timer > 0:
-			direction = lastKnownPlayerLocation
-			velocity = direction * chase_speed
-			chase_timer -= 1
-		current_state = State.PATROL
-		velocity = Vector2.ZERO
+		current_state = State.SEARCH
 		return
+
+	last_known_player_location = player.global_position
+
+	var direction = global_position.direction_to(
+		last_known_player_location
+	)
+
+	velocity = direction * chase_speed
 
 	direction = global_position.direction_to(
 		player.global_position
@@ -96,14 +103,44 @@ func chase_player():
 
 	velocity = direction * chase_speed
 
+func search_last_location(delta):
+	var distance = global_position.distance_to(
+		last_known_player_location
+	)
+
+	if distance > 5.0:
+		var direction = global_position.direction_to(
+			last_known_player_location
+		)
+		velocity = direction * chase_speed
+	else:
+		velocity = Vector2.ZERO
+		search_timer -= delta
+
+		if search_timer <= 0:
+			idle_timer = idle_time
+			current_state = State.IDLE
 
 func _on_body_entered(body: Node2D):
 	if body is CharacterBody2D and body.is_in_group("player"):
 		player = body
 		current_state = State.CHASE
+		
+
 
 
 func _on_body_exited(body: Node2D):
 	if body == player:
+		last_known_player_location = player.global_position
 		player = null
-		current_state = State.PATROL
+		search_timer = search_wait_time
+		current_state = State.SEARCH
+		
+func take_damage(amount: int) -> void:
+# If you decide to add an enemy health variable later, manage it here
+# For now, let's just make it die instantly upon a player strike
+	die()
+	
+func die() -> void:
+# Safely vanish the monster scene tree instance cleanly between engine steps
+	queue_free()

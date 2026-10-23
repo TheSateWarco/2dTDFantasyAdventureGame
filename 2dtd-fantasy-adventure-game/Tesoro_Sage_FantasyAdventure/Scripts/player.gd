@@ -17,19 +17,37 @@ func take_damage(amount: int):
 	play_action_animation("hit")
 	health_changed.emit(health)
 	
-	
+var knockback_velocity: Vector2 = Vector2.ZERO
 
-func _physics_process(_delta):
-	
-	var inputDirection = Input.get_vector("moveLeft", "moveRight", "moveUp",
-	"moveDown")
-	
+@export var knockback_strength: float = 250.0
+@export var knockback_friction: float = 800.0
+
+func apply_knockback(source_position: Vector2):
+	var knockback_direction = global_position - source_position
+	knockback_direction = knockback_direction.normalized()
+
+	knockback_velocity = knockback_direction * knockback_strength
+
+func _physics_process(delta):
+	var inputDirection = Input.get_vector(
+		"moveLeft", "moveRight", "moveUp", "moveDown"
+	)
+
 	velocity = inputDirection * speed
+
+	# Apply knockback
+	velocity += knockback_velocity
+	knockback_velocity = knockback_velocity.move_toward(
+		Vector2.ZERO,
+		knockback_friction * delta
+	)
+
 	update_direction(inputDirection)
+
 	if not is_action_playing:
 		update_movement_animation(inputDirection)
+
 	move_and_slide()
-	
 func update_movement_animation(input_direction):
 	if input_direction == Vector2.ZERO:
 		animatedSprite.play("idle" + lastDirection)
