@@ -9,12 +9,11 @@
 radius = 19.186903
 
 [node name="Blob" type="CharacterBody2D" unique_id=608503223]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(4, 4)
 collision_layer = 2
 script = ExtResource("1_hxqqi")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1430882816]
-position = Vector2(0, -1.955)
 scale = Vector2(0.039230824, 0.039469555)
 texture = ExtResource("1_y8vdf")
 

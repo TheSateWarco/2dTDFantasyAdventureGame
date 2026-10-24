@@ -46,36 +46,55 @@ func _on_spawn_timer_timeout() -> void:
 		spawn_new_blob()
 
 
-func spawn_new_blob() -> void:
-	# 5. Pick a random spawn location
-	var random_marker = spawn_points.pick_random()
-	print(random_marker)
-	# 6. Instantiate the blob scene
-	var new_blob = blob_scene.instantiate() as CharacterBody2D
-	new_blob.add_to_group("enemies")
-	# 7. Set the blob's global position
-	new_blob.global_position = random_marker.global_position
-	
-	# 8. Track the blob and add it to the active level
-	active_blobs.append(new_blob)
-	get_parent().add_child.call_deferred(new_blob)
 
-	# Optional: Play a spawn animation
+func spawn_new_blob() -> void:
+	if spawn_points.is_empty() or blob_scene == null:
+		return
+
+	# Pick a random spawn marker
+	var random_marker: Marker2D = spawn_points.pick_random()
+
+	# Instantiate the blob
+	var new_blob = blob_scene.instantiate() as CharacterBody2D
+	if new_blob == null:
+		return
+
+	new_blob.add_to_group("enemies")
+
+	# Add it to the level first
+	get_parent().add_child(new_blob)
+
+	# Position it at the marker's global position
+	new_blob.global_position = random_marker.global_position
+
+	# Track the blob
+	active_blobs.append(new_blob)
+
+	# Play spawn animation
 	trigger_spawn_juice(new_blob)
 
 
+
+
 func trigger_spawn_juice(target_blob: CharacterBody2D) -> void:
-	# Find the blob's sprite
 	var blob_sprite = target_blob.get_node_or_null("Sprite2D")
 
 	if blob_sprite:
-		# Animate the sprite as it emerges
-		var spawn_tween = create_tween()
+		var original_scale: Vector2 = blob_sprite.scale
+
+		# Start invisible in size, preserving the original scale
 		blob_sprite.scale = Vector2.ZERO
 
+		var spawn_tween = create_tween()
 		spawn_tween.tween_property(
-			blob_sprite, "scale", Vector2(1.3, 1.3), 0.15
+			blob_sprite,
+			"scale",
+			original_scale * 1.3,
+			0.15
 		)
 		spawn_tween.tween_property(
-			blob_sprite, "scale", Vector2(1.0, 1.0), 0.1
+			blob_sprite,
+			"scale",
+			original_scale,
+			0.1
 		)
