@@ -19,7 +19,7 @@ func take_damage(amount: int):
 	
 var knockback_velocity: Vector2 = Vector2.ZERO
 
-@export var knockback_strength: float = 250.0
+@export var knockback_strength: float = 400.0
 @export var knockback_friction: float = 800.0
 
 func apply_knockback(source_position: Vector2):

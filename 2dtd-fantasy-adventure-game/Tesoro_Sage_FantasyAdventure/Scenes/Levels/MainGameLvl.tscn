@@ -30,10 +30,6 @@ scale = Vector2(5.125, 4.179)
 
 [node name="HealthBar" parent="." unique_id=512292260 instance=ExtResource("3_4frqq")]
 
-[node name="Blob" parent="." unique_id=608503223 groups=["enemies"] instance=ExtResource("4_pupx1")]
-position = Vector2(495.9952, 429.15012)
-scale = Vector2(0.4, 0.4)
-
 [node name="BlobSpawner" parent="." unique_id=707178425 instance=ExtResource("5_1gsnn")]
 position = Vector2(764.1007, 425.1205)
 blob_scene = ExtResource("4_pupx1")

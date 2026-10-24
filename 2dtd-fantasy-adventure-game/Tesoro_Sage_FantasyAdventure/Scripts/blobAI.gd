@@ -1,7 +1,7 @@
 
 extends CharacterBody2D
 
-enum State { IDLE, PATROL, CHASE, SEARCH, ATTACK }
+enum State { IDLE, PATROL, CHASE, SEARCH }
 
 @export_group("Movement")
 @export var patrol_speed: float = 40.0
@@ -9,7 +9,7 @@ enum State { IDLE, PATROL, CHASE, SEARCH, ATTACK }
 
 @export_group("Timing")
 @export var idle_time: float = 2.0
-@export var patrol_distance: float = 100.0
+@export var patrol_radius: float = 100.0
 @export var search_wait_time: float = 1.0
 var search_timer: float = 0.0
 var last_known_player_location: Vector2 = Vector2.ZERO
@@ -19,8 +19,8 @@ var last_known_player_location: Vector2 = Vector2.ZERO
 var current_state: State = State.IDLE
 var player: CharacterBody2D = null
 
-var patrol_points: Array[Vector2] = []
-var patrol_index: int = 0
+var home_position: Vector2
+var patrol_target: Vector2
 var idle_timer: float = 0.0
 var chase_timer: float = 0.0
 var is_patrolling: bool = false
@@ -28,20 +28,19 @@ var lastKnownPlayerLocation = Vector2.ZERO
 
 @onready var detectionArea: Area2D = $DetectionArea
 
-
+func initialize_patrol(spawn_position: Vector2) -> void:
+	home_position = spawn_position
+	patrol_target = get_random_patrol_position()
+	
 func _ready():
-	# Create two patrol points around the starting position.
-	patrol_points = [
-		global_position,
-		global_position + Vector2(patrol_distance, 0)
-	]
-
 	idle_timer = idle_time
 	current_state = State.IDLE
 
-	detectionArea.body_entered.connect(_on_body_entered)
-	detectionArea.body_exited.connect(_on_body_exited)
+	if not detectionArea.body_entered.is_connected(_on_body_entered):
+		detectionArea.body_entered.connect(_on_body_entered)
 
+	if not detectionArea.body_exited.is_connected(_on_body_exited):
+		detectionArea.body_exited.connect(_on_body_exited)
 
 func _physics_process(delta):
 	match current_state:
@@ -65,22 +64,23 @@ func _physics_process(delta):
 
 
 
+
 func patrol():
-	var target = patrol_points[patrol_index]
-	var direction = global_position.direction_to(target)
+	var distance = global_position.distance_to(patrol_target)
 
-	velocity = direction * patrol_speed
-
-	# Check whether the Blob reached its patrol point.
-	if global_position.distance_to(target) < 5.0:
+	if distance < 5.0:
 		velocity = Vector2.ZERO
 
-		# Switch to the other patrol point.
-		patrol_index = (patrol_index + 1) % patrol_points.size()
+		# Choose a different destination for the next patrol
+		patrol_target = get_random_patrol_position()
 
-		# Stop patrolling and idle before moving again.
 		idle_timer = idle_time
 		current_state = State.IDLE
+		return
+
+	var direction = global_position.direction_to(patrol_target)
+	velocity = direction * patrol_speed
+
 
 func chase_player():
 	if not is_instance_valid(player):
@@ -120,7 +120,14 @@ func search_last_location(delta):
 		if search_timer <= 0:
 			idle_timer = idle_time
 			current_state = State.IDLE
+			
+func get_random_patrol_position() -> Vector2:
+	var offset = Vector2(
+		randf_range(-patrol_radius, patrol_radius),
+		randf_range(-patrol_radius, patrol_radius)
+	)
 
+	return home_position + offset
 func _on_body_entered(body: Node2D):
 	if body is CharacterBody2D and body.is_in_group("player"):
 		player = body

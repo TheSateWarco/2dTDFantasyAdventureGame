@@ -30,7 +30,10 @@ func _ready() -> void:
 	spawn_timer.wait_time = spawn_cooldown
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	spawn_timer.start()
+	print("Number of spawn points found: ", spawn_points.size())
 
+	for marker in spawn_points:
+		print("Spawn point: ", marker.name, " | Position: ", marker.global_position)
 
 func _on_spawn_timer_timeout() -> void:
 	# 3. Remove blobs that have been freed
@@ -51,28 +54,25 @@ func spawn_new_blob() -> void:
 	if spawn_points.is_empty() or blob_scene == null:
 		return
 
-	# Pick a random spawn marker
 	var random_marker: Marker2D = spawn_points.pick_random()
-
-	# Instantiate the blob
 	var new_blob = blob_scene.instantiate() as CharacterBody2D
+
 	if new_blob == null:
 		return
 
 	new_blob.add_to_group("enemies")
 
-	# Add it to the level first
+	# Add the blob to the level
 	get_parent().add_child(new_blob)
 
-	# Position it at the marker's global position
+	# Position the blob at its selected marker
 	new_blob.global_position = random_marker.global_position
 
-	# Track the blob
+	# Set its patrol home explicitly
+	new_blob.initialize_patrol(new_blob.global_position)
+
 	active_blobs.append(new_blob)
-
-	# Play spawn animation
 	trigger_spawn_juice(new_blob)
-
 
 
 
