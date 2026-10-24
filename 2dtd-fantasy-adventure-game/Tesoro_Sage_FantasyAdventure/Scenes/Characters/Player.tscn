@@ -1913,6 +1913,10 @@ height = 18.0
 [node name="Player" type="CharacterBody2D" unique_id=70149729 groups=["player"]]
 collision_mask = 2
 script = ExtResource("1_kp4g2")
+speed = null
+attack_distance = null
+knockback_strength = null
+knockback_friction = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1357244899]
 sprite_frames = SubResource("SpriteFrames_l20gf")
@@ -1938,5 +1942,12 @@ volume_db = 10.0
 [node name="SwordSlashSound" type="AudioStreamPlayer2D" parent="." unique_id=1773230159]
 stream = ExtResource("5_gh1l8")
 volume_db = 10.0
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1315232451]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=184686396]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_k0x5d")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

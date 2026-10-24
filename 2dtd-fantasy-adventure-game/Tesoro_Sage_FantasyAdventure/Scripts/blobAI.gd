@@ -8,7 +8,8 @@ enum State { IDLE, PATROL, CHASE, SEARCH }
 @export var chase_speed: float = 70.0
 
 @export_group("Timing")
-@export var idle_time: float = 2.0
+@export var min_idle_time: float = 1.0
+@export var max_idle_time: float = 4.0
 @export var patrol_radius: float = 100.0
 @export var search_wait_time: float = 1.0
 var search_timer: float = 0.0
@@ -33,7 +34,7 @@ func initialize_patrol(spawn_position: Vector2) -> void:
 	patrol_target = get_random_patrol_position()
 	
 func _ready():
-	idle_timer = idle_time
+	idle_timer = get_random_idle_time()
 	current_state = State.IDLE
 
 	if not detectionArea.body_entered.is_connected(_on_body_entered):
@@ -63,7 +64,8 @@ func _physics_process(delta):
 	move_and_slide()
 
 
-
+func get_random_idle_time() -> float:
+	return randf_range(min_idle_time, max_idle_time)
 
 func patrol():
 	var distance = global_position.distance_to(patrol_target)
@@ -74,7 +76,7 @@ func patrol():
 		# Choose a different destination for the next patrol
 		patrol_target = get_random_patrol_position()
 
-		idle_timer = idle_time
+		idle_timer = get_random_idle_time()
 		current_state = State.IDLE
 		return
 
@@ -118,7 +120,7 @@ func search_last_location(delta):
 		search_timer -= delta
 
 		if search_timer <= 0:
-			idle_timer = idle_time
+			idle_timer = get_random_idle_time()
 			current_state = State.IDLE
 			
 func get_random_patrol_position() -> Vector2:
