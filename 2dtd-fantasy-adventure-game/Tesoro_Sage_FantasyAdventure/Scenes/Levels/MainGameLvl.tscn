@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cmuknvmn604cd" path="res://Tesoro_Sage_FantasyAdventure/Scenes/Characters/Blob/Blob.tscn" id="4_pupx1"]
 [ext_resource type="PackedScene" uid="uid://bnkc7ld2q82yy" path="res://Tesoro_Sage_FantasyAdventure/Scenes/Characters/Blob/BlobSpawner.tscn" id="5_1gsnn"]
 [ext_resource type="Script" uid="uid://bpyplvobys7db" path="res://Tesoro_Sage_FantasyAdventure/Scenes/Levels/minimap.gd" id="6_uhhju"]
+[ext_resource type="Texture2D" uid="uid://cxnhjkmj4o804" path="res://Tesoro_Sage_FantasyAdventure/Assets/Art/Badges&Icons/40_a.PNG" id="7_v0fs8"]
 
 [node name="MainGameLvl" type="Node2D" unique_id=1953114883]
 scale = Vector2(0.447585, 0.4963298)
@@ -50,3 +51,13 @@ offset_bottom = 160.0
 grow_horizontal = 0
 script = ExtResource("6_uhhju")
 player = NodePath("../../Player")
+
+[node name="Coin" type="Node2D" parent="." unique_id=1184756803 groups=["coins"]]
+position = Vector2(366.41086, 223.64162)
+scale = Vector2(0.075, 0.075)
+
+[node name="cointsRect" type="TextureRect" parent="Coin" unique_id=1767573841]
+offset_right = 512.0
+offset_bottom = 512.0
+texture = ExtResource("7_v0fs8")
+metadata/_edit_use_anchors_ = true
